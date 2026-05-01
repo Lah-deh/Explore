@@ -18,6 +18,7 @@ export default function Home() {
         setLoading(true)
         setError(false)
         const res = await fetch("https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,cca2")
+        { cache: "no-store" }
         if (!res.ok) throw new Error("Failed to fetch")
         const data: Country[] = await res.json()
         const sorted = data.sort((a, b) =>
@@ -63,7 +64,7 @@ export default function Home() {
       {!loading && !error && search && (
         <p className="text-gray-500 text-xs mb-6">
           {filtered.length} result{filtered.length !== 1 ? "s" : ""} for{" "}
-          <span className="text-[#cf1247]">"{search}"</span>
+          <span className="text-[#cf1247]">`{search}`</span>
         </p>
       )}
 
